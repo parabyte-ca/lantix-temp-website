@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lantix Advisory — Senior consulting in operational resilience, audit and compliance, risk and governance, and AI strategy. Canadian-owned.">
+<title>Lantix Advisory Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Barlow:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── FONTS ── */
+@font-face {
+  font-family: 'FashionFetish';
+  src: url('assets/fonts/FashionFetish-Regular.ttf') format('truetype');
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: 'WalkwayBold';
+  src: url('assets/fonts/WalkwayBold.ttf') format('truetype');
+  font-weight: 700; font-display: swap;
+}
+
+/* ── TOKENS ── */
+:root {
+  --bg:   #0b0a08; --bg2:  #0f0e0b; --bg3:  #141210;
+  --surf: #1a1814; --surf2:#201e1a;
+  --rule: #252218; --rule2:#2e2b22;
+  --dim:  #4a4640; --muted:#7a7468; --pale: #9a9488;
+  --paper:#f0ece2; --white:#ffffff;
+  --gold: #c8a84b; --gold2:#a88830;
+  --gold-pale:rgba(200,168,75,.12);
+  --violet:#9060c8; --violet2:#7048a8;
+  --violet-pale:rgba(144,96,200,.12);
+  --s1:#8050c0; --s2:#c8a84b; --s3:#7040b0; --s4:#787888; --s5:#c8a84b;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --logo: 'FashionFetish','Courier New',monospace;
+  --mono: 'WalkwayBold',sans-serif;
+  --sans: 'Barlow',system-ui,sans-serif;
+  --max:  1280px;
+  --pad:  clamp(1.5rem,5vw,5rem);
+  --nav-h:68px;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--paper);font-family:var(--sans);
+  line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ── NOISE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;opacity:.022;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── SCROLL PROGRESS ── */
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:600;
+  background:linear-gradient(90deg,var(--violet),var(--gold));
+  transform-origin:left;transform:scaleX(0);will-change:transform;pointer-events:none}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;
+  display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);
+  background:rgba(11,10,8,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--rule);transition:background .3s var(--ease),border-color .3s}
+.nav.scrolled{background:rgba(11,10,8,.98);border-color:var(--rule2)}
+.nav__brand{display:flex;align-items:flex-end;gap:11px;opacity:1;transition:opacity .2s}
+.nav__brand:hover{opacity:.8}
+.spectrum{display:flex;align-items:flex-end;flex-shrink:0}
+.spectrum .sl{border-radius:1px 1px 0 0;flex-shrink:0}
+.spectrum .sl:nth-child(1){background:var(--s1)}
+.spectrum .sl:nth-child(2){background:var(--s2)}
+.spectrum .sl:nth-child(3){background:var(--s3)}
+.spectrum .sl:nth-child(4){background:var(--s4)}
+.spectrum .sl:nth-child(5){background:var(--s5)}
+.spectrum--sm{gap:4px}
+.spectrum--sm .sl{width:4px}
+.spectrum--sm .sl:nth-child(1){height:28px}
+.spectrum--sm .sl:nth-child(2){height:34px}
+.spectrum--sm .sl:nth-child(3){height:24px}
+.spectrum--sm .sl:nth-child(4){height:20px}
+.spectrum--sm .sl:nth-child(5){height:30px}
+.spectrum--xs{gap:3px}
+.spectrum--xs .sl{width:3px}
+.spectrum--xs .sl:nth-child(1){height:18px}
+.spectrum--xs .sl:nth-child(2){height:22px}
+.spectrum--xs .sl:nth-child(3){height:15px}
+.spectrum--xs .sl:nth-child(4){height:12px}
+.spectrum--xs .sl:nth-child(5){height:20px}
+.spectrum--ghost .sl{opacity:.12}
+.nav__wordmark{font-family:var(--logo);font-size:1.1rem;font-weight:400;
+  letter-spacing:.38em;color:var(--white);line-height:1;padding-bottom:3px}
+.nav__links{display:flex;align-items:center;gap:2.2rem}
+.nav__links a{font-family:var(--sans);font-size:.72rem;font-weight:400;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--muted);
+  transition:color .2s;position:relative;padding-bottom:2px}
+.nav__links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s var(--ease)}
+.nav__links a:hover{color:var(--paper)}
+.nav__links a:hover::after{transform:scaleX(1)}
+.nav__cta{font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(200,168,75,.4);padding:.5rem 1.2rem;
+  transition:background .2s,border-color .2s;cursor:pointer}
+.nav__cta:hover{background:var(--gold-pale);border-color:var(--gold)}
+.nav__burger{display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:.3rem;background:none;border:none}
+.nav__burger span{display:block;width:22px;height:1.5px;
+  background:linear-gradient(90deg,var(--violet),var(--gold));transition:transform .3s,opacity .3s}
+.nav__mobile{display:none;position:fixed;top:var(--nav-h);left:0;right:0;
+  background:rgba(11,10,8,.98);border-bottom:1px solid var(--rule2);
+  padding:1.5rem var(--pad) 2rem;z-index:499;flex-direction:column;gap:0}
+.nav__mobile.open{display:flex}
+.nav__mobile a{display:block;padding:.9rem 0;font-family:var(--sans);font-size:.9rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--rule);transition:color .2s}
+.nav__mobile a:hover{color:var(--paper)}
+.nav__mobile .nav__cta{margin-top:1.5rem;text-align:center;display:block}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding-top:var(--nav-h);padding-left:var(--pad);
+  padding-right:var(--pad);display:flex;flex-direction:column;
+  justify-content:center;position:relative;overflow:hidden}
+.hero__orb{position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  width:min(1100px,150%);height:750px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(144,96,200,.07) 0%,rgba(200,168,75,.04) 45%,transparent 70%)}
+.hero__inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;padding:3rem 0 2rem;position:relative;
+  z-index:1;max-width:var(--max);margin:0 auto;width:100%}
+.hero__eyebrow{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.22em;color:var(--violet);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.8rem}
+.hero__eyebrow::before{content:'';width:32px;height:1px;background:var(--violet);display:block}
+.hero__headline{font-family:var(--serif);font-size:clamp(3rem,5.5vw,5.5rem);
+  font-weight:300;line-height:1.03;letter-spacing:-.015em;
+  color:var(--white);margin-bottom:1.8rem}
+.hero__headline em{font-style:italic;color:var(--gold)}
+.hero__sub{font-size:1rem;font-weight:300;color:var(--muted);
+  line-height:1.85;max-width:460px;margin-bottom:2.5rem}
+.hero__actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero__right{display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  animation:floatY 7s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero__spectrum-wrap{display:flex;align-items:flex-end;gap:12px}
+.vu-track{position:relative;overflow:hidden;border-radius:2px 2px 0 0}
+.vu-fill{position:absolute;bottom:0;left:0;width:100%;border-radius:2px 2px 0 0}
+.hero__wordmark-wrap{text-align:center}
+.hero__wordmark{font-family:var(--logo);font-size:clamp(1.6rem,2.8vw,2.4rem);
+  font-weight:400;letter-spacing:.55em;text-indent:.55em;color:var(--white);line-height:1}
+.hero__descriptor{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin-top:.6rem}
+.hero__stats{border-top:1px solid var(--rule);padding:1.5rem 0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
+  position:relative;z-index:1;max-width:var(--max);margin:0 auto;width:100%}
+.stat__num{font-family:var(--serif);font-size:2.4rem;font-weight:300;
+  color:var(--white);line-height:1}
+.stat__num span{color:var(--gold)}
+.stat__label{font-size:.7rem;font-weight:300;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--muted);margin-top:.3rem}
+</style>
+</head>
+<body>
+<!-- Scroll progress -->
+<div class="scroll-progress" id="sp"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav__brand">
+    <div class="spectrum spectrum--sm">
+      <div class="sl"></div><div class="sl"></div><div class="sl"></div>
+      <div class="sl"></div><div class="sl"></div>
+    </div>
+    <span class="nav__wordmark">LANTIX</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav__cta">Engage Us</a>
+  <button class="nav__burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav__mobile" id="mobile-nav">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="nav__cta">Engage Us →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero__orb"></div>
+  <div class="hero__inner">
+    <div>
+      <div class="hero__eyebrow">Canadian Advisory Group</div>
+      <h1 class="hero__headline">The elements that<br><em>power resilience.</em></h1>
+      <p class="hero__sub">Lantix brings senior-level expertise in operational resilience, compliance, risk governance, and AI strategy — built for Canadian organizations that can't afford to get it wrong.</p>
+      <div class="hero__actions">
+        <a href="#services" class="btn btn--primary">Our Services</a>
+        <a href="#about" class="btn btn--ghost">Our Approach</a>
+      </div>
+    </div>
+    <div class="hero__right">
+      <div class="hero__spectrum-wrap" id="vu-hero"></div>
+      <div class="hero__wordmark-wrap">
+        <div class="hero__wordmark">LANTIX</div>
+        <div class="hero__descriptor">Advisory Group · Est. Canada</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__stats">
+    <div class="stat reveal"><div class="stat__num">25<span>+</span></div><div class="stat__label">Years Senior Experience</div></div>
+    <div class="stat reveal reveal-delay-1"><div class="stat__num">4</div><div class="stat__label">Core Practice Areas</div></div>
+    <div class="stat reveal reveal-delay-2"><div class="stat__num">100<span>%</span></div><div class="stat__label">Canadian-Owned</div></div>
+    <div class="stat reveal reveal-delay-3"><div class="stat__num">1<span>:1</span></div><div class="stat__label">Principal-Led Delivery</div></div>
+  </div>
+</section>
+</body>
+</html>
+
+<!-- continuing from hero — inject remaining styles and sections -->
+<style>
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:all .2s var(--ease);border:none;padding:.85rem 2rem;white-space:nowrap}
+.btn--primary{background:var(--gold);color:var(--bg)}
+.btn--primary:hover{background:#d8b85c;transform:translateY(-1px)}
+.btn--outline{background:none;color:var(--paper);border:1px solid var(--rule2)}
+.btn--outline:hover{border-color:rgba(200,168,75,.5);color:var(--gold)}
+.btn--ghost{background:none;color:var(--muted);padding-left:0;padding-right:0}
+.btn--ghost:hover{color:var(--paper)}
+.btn--ghost::after{content:'→';margin-left:.3rem}
+
+/* ── REVEALS ── */
+.reveal{opacity:0;transform:translateY(24px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-28px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(28px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+.reveal-delay-4{transition-delay:.32s}
+
+/* ── SECTIONS ── */
+.section{padding:6rem var(--pad);position:relative}
+.section--alt{background:var(--bg2)}
+.section--surf{background:var(--surf)}
+.section__inner{max-width:var(--max);margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.2em;color:var(--violet);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--violet);display:block}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3.4rem);
+  font-weight:300;line-height:1.08;letter-spacing:-.01em;
+  color:var(--white);margin-bottom:1.2rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-lead{font-size:1rem;font-weight:300;color:var(--muted);
+  line-height:1.85;max-width:600px}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:0 var(--pad)}
+
+/* ── SERVICES GRID ── */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.svc-card{background:var(--bg);padding:3rem 2.5rem;
+  position:relative;overflow:hidden;transition:background .25s}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--violet),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.svc-card:hover{background:var(--surf)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-card__num{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;
+  color:var(--dim);margin-bottom:1.2rem}
+.svc-card__icon{width:48px;height:48px;margin-bottom:1.5rem;opacity:.7}
+.svc-card__title{font-family:var(--serif);font-size:1.6rem;font-weight:300;
+  color:var(--white);line-height:1.1;margin-bottom:1rem}
+.svc-card__body{font-size:.88rem;font-weight:300;color:var(--muted);
+  line-height:1.8;margin-bottom:1.5rem}
+.svc-card__tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--rule);padding:.2rem .55rem;
+  transition:color .2s,border-color .2s}
+.tag--violet{color:var(--violet);border-color:rgba(144,96,200,.25)}
+.tag--gold{color:var(--gold);border-color:rgba(200,168,75,.25)}
+.tag--dim{color:var(--dim);border-color:var(--rule)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-element{border:1px solid var(--rule2);padding:1.5rem;
+  text-align:center;background:var(--bg);width:100px;margin-bottom:2rem}
+.about-element__num{font-family:var(--mono);font-size:.6rem;color:var(--violet);
+  letter-spacing:.1em;display:block}
+.about-element__sym{font-family:var(--serif);font-size:2.5rem;font-weight:300;
+  color:var(--gold);line-height:1;display:block}
+.about-element__name{font-family:var(--mono);font-size:.5rem;color:var(--dim);
+  letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:.2rem}
+.about-body{font-size:.95rem;font-weight:300;color:var(--muted);
+  line-height:1.85;margin-bottom:1.5rem}
+.about-body strong{color:var(--paper);font-weight:400}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.pillar{background:var(--bg);padding:1.4rem}
+.pillar__num{font-family:var(--mono);font-size:.55rem;color:var(--violet);
+  letter-spacing:.1em;margin-bottom:.3rem}
+.pillar__title{font-size:.85rem;font-weight:400;color:var(--paper);margin-bottom:.2rem}
+.pillar__body{font-size:.78rem;font-weight:300;color:var(--dim);line-height:1.55}
+
+/* ── OWNER ── */
+.owner-section{background:var(--surf);border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);padding:5rem var(--pad)}
+.owner-inner{max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:center}
+.owner-mark{display:flex;flex-direction:column;align-items:center;
+  gap:1.5rem;flex-shrink:0}
+.owner-spectrum{display:flex;align-items:flex-end;gap:9px}
+.owner-spectrum .os{border-radius:1px 1px 0 0}
+.owner-spectrum .os:nth-child(1){width:7px;height:120px;background:#8050c0}
+.owner-spectrum .os:nth-child(2){width:7px;height:144px;background:#c8a84b}
+.owner-spectrum .os:nth-child(3){width:7px;height:104px;background:#7040b0}
+.owner-spectrum .os:nth-child(4){width:7px;height:88px;background:#787888}
+.owner-spectrum .os:nth-child(5){width:7px;height:130px;background:#c8a84b}
+.owner-wordmark{font-family:var(--logo);font-size:1.4rem;font-weight:400;
+  letter-spacing:.45em;text-indent:.45em;color:var(--white)}
+.owner-content{}
+.owner-quote{font-family:var(--serif);font-size:1.35rem;font-style:italic;
+  font-weight:300;color:var(--paper);line-height:1.5;
+  border-left:2px solid var(--gold);padding-left:1.8rem;margin-bottom:2rem}
+.owner-name{font-family:var(--serif);font-size:1.8rem;font-weight:300;
+  color:var(--white);margin-bottom:.3rem}
+.owner-title{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;
+  letter-spacing:.16em;color:var(--gold);margin-bottom:1.5rem}
+.owner-bio{font-size:.9rem;font-weight:300;color:var(--muted);
+  line-height:1.85;max-width:560px}
+.owner-bio strong{color:var(--paper);font-weight:400}
+
+/* ── WHY US ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.why-card{background:var(--bg);padding:2.5rem 2rem}
+.why-card__num{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+  color:var(--violet);margin-bottom:1rem}
+.why-card__title{font-family:var(--serif);font-size:1.25rem;font-weight:400;
+  color:var(--white);margin-bottom:.7rem}
+.why-card__body{font-size:.85rem;font-weight:300;color:var(--muted);line-height:1.75}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--muted)}
+.form-group input,.form-group select,.form-group textarea{
+  background:var(--surf);border:1px solid var(--rule);color:var(--paper);
+  font-family:var(--sans);font-size:.9rem;font-weight:300;
+  padding:.8rem 1rem;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;border-radius:0;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:rgba(144,96,200,.5)}
+.form-group input::placeholder,.form-group textarea::placeholder{
+  color:var(--dim);font-style:italic}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-group select option{background:var(--bg3)}
+.contact-info{display:flex;flex-direction:column;gap:2.5rem}
+.contact-channel{display:flex;gap:1.2rem;align-items:flex-start}
+.contact-channel__icon{width:40px;height:40px;border:1px solid var(--rule2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:var(--mono);font-size:.65rem;color:var(--violet)}
+.contact-channel__label{font-family:var(--mono);font-size:.6rem;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--dim);margin-bottom:.2rem}
+.contact-channel__value{font-size:.92rem;font-weight:300;color:var(--paper)}
+.contact-promise{margin-top:1rem;padding:1.5rem;background:var(--surf);
+  border:1px solid var(--rule);border-left:2px solid var(--gold)}
+.contact-promise p{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;
+  color:var(--dim);line-height:1.65}
+
+/* ── FOOTER ── */
+.footer{background:var(--bg3);border-top:1px solid var(--rule);padding:3rem var(--pad) 2rem}
+.footer__inner{max-width:var(--max);margin:0 auto}
+.footer__top{display:flex;justify-content:space-between;align-items:flex-end;
+  padding-bottom:2rem;border-bottom:1px solid var(--rule);margin-bottom:1.5rem}
+.footer__brand{display:flex;align-items:flex-end;gap:10px}
+.footer__wordmark{font-family:var(--logo);font-size:.9rem;font-weight:400;
+  letter-spacing:.3em;color:var(--paper)}
+.footer__tagline{font-family:var(--serif);font-size:.88rem;font-style:italic;
+  font-weight:300;color:var(--muted)}
+.footer__bottom{display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap}
+.footer__copy{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim)}
+
+/* ── BACK TO TOP ── */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;
+  background:var(--surf);border:1px solid var(--rule2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .3s,background .2s;z-index:200;
+  font-size:.9rem;color:var(--muted)}
+.back-top.visible{opacity:1;pointer-events:all}
+.back-top:hover{background:var(--surf2);color:var(--paper)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:1fr 1fr}
+  .about-grid,.contact-grid{gap:3rem}
+}
+@media(max-width:768px){
+  :root{--pad:clamp(1rem,5vw,2.5rem)}
+  .nav__links,.nav__cta{display:none}
+  .nav__burger{display:flex}
+  .hero__inner{grid-template-columns:1fr;gap:2rem;padding:4rem 0 2rem}
+  .hero__right{display:none}
+  .hero__stats{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .services-grid{grid-template-columns:1fr}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .owner-inner{grid-template-columns:1fr;gap:2.5rem}
+  .owner-mark{flex-direction:row;align-items:flex-end}
+  .why-grid{grid-template-columns:1fr}
+  .section{padding:4rem var(--pad)}
+  .footer__top{flex-direction:column;align-items:flex-start;gap:1rem}
+}
+@media(max-width:540px){
+  .hero__stats{grid-template-columns:1fr 1fr}
+  .pillars{grid-template-columns:1fr}
+}
+</style>
+
+<!-- ── SERVICES ── -->
+<section class="section section--alt" id="services">
+  <div class="section__inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:3rem">
+      <div class="reveal-left">
+        <div class="eyebrow">What We Do</div>
+        <h2 class="section-title">Four practice areas.<br><em>One integrated firm.</em></h2>
+      </div>
+      <p class="section-lead reveal-right">Complex challenges rarely respect functional boundaries. Our practice areas are designed to work together across the full risk and resilience spectrum.</p>
+    </div>
+    <div class="services-grid reveal">
+
+      <!-- 01 Operational Resilience -->
+      <div class="svc-card">
+        <div class="svc-card__num">01 / 04</div>
+        <svg class="svc-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="20" stroke="#8050c0" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="11" stroke="#c8a84b" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="3" fill="#9060c8"/>
+          <line x1="24" y1="4" x2="24" y2="13" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="24" y1="35" x2="24" y2="44" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="4" y1="24" x2="13" y2="24" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="35" y1="24" x2="44" y2="24" stroke="#8050c0" stroke-width="1.5"/>
+        </svg>
+        <div class="svc-card__title">Operational<br>Resilience</div>
+        <p class="svc-card__body">BCM programme design, business impact analysis, crisis management frameworks, and continuity testing — built to withstand regulatory scrutiny and real-world stress. We design resilience architectures that hold under adverse conditions, not just on paper.</p>
+        <div class="svc-card__tags">
+          <span class="tag tag--violet">BCM Frameworks</span>
+          <span class="tag tag--violet">Crisis Management</span>
+          <span class="tag tag--gold">BIA</span>
+          <span class="tag tag--gold">Recovery Planning</span>
+          <span class="tag tag--dim">Testing & Exercises</span>
+        </div>
+      </div>
+
+      <!-- 02 Audit & Compliance -->
+      <div class="svc-card">
+        <div class="svc-card__num">02 / 04</div>
+        <svg class="svc-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="6" width="28" height="36" rx="1" stroke="#c8a84b" stroke-width="1.5"/>
+          <line x1="14" y1="15" x2="30" y2="15" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="14" y1="29" x2="22" y2="29" stroke="#8050c0" stroke-width="1.5"/>
+          <polyline points="26,26 30,32 38,22" stroke="#c8a84b" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div class="svc-card__title">Audit &amp;<br>Compliance</div>
+        <p class="svc-card__body">Internal audit programme development, regulatory compliance gap analysis, and control framework design aligned to Canadian and international standards. We translate regulatory obligation into operational practice — clearly, traceably, and sustainably.</p>
+        <div class="svc-card__tags">
+          <span class="tag tag--violet">Internal Audit</span>
+          <span class="tag tag--violet">Gap Analysis</span>
+          <span class="tag tag--gold">Control Frameworks</span>
+          <span class="tag tag--gold">ISO 22301</span>
+          <span class="tag tag--dim">Regulatory Alignment</span>
+        </div>
+      </div>
+
+      <!-- 03 Risk & Governance -->
+      <div class="svc-card">
+        <div class="svc-card__num">03 / 04</div>
+        <svg class="svc-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="24,6 44,38 4,38" stroke="#8050c0" stroke-width="1.5" fill="none"/>
+          <line x1="24" y1="18" x2="24" y2="28" stroke="#c8a84b" stroke-width="2"/>
+          <circle cx="24" cy="32" r="1.5" fill="#c8a84b"/>
+        </svg>
+        <div class="svc-card__title">Risk &amp;<br>Governance</div>
+        <p class="svc-card__body">Enterprise risk management architecture, GRC framework design, and board-level governance advisory. We build the structures that make risk visible, accountable, and manageable — from risk appetite statements to committee mandates to operational dashboards.</p>
+        <div class="svc-card__tags">
+          <span class="tag tag--violet">ERM Architecture</span>
+          <span class="tag tag--violet">GRC Frameworks</span>
+          <span class="tag tag--gold">Risk Appetite</span>
+          <span class="tag tag--gold">Board Advisory</span>
+          <span class="tag tag--dim">Policy Development</span>
+        </div>
+      </div>
+
+      <!-- 04 AI Strategy -->
+      <div class="svc-card">
+        <div class="svc-card__num">04 / 04</div>
+        <svg class="svc-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="14" width="20" height="20" rx="2" stroke="#c8a84b" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="4" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="24" y1="6" x2="24" y2="14" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="24" y1="34" x2="24" y2="42" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="6" y1="24" x2="14" y2="24" stroke="#8050c0" stroke-width="1.5"/>
+          <line x1="34" y1="24" x2="42" y2="24" stroke="#8050c0" stroke-width="1.5"/>
+          <circle cx="24" cy="6" r="2" fill="#c8a84b"/>
+          <circle cx="24" cy="42" r="2" fill="#c8a84b"/>
+          <circle cx="6" cy="24" r="2" fill="#c8a84b"/>
+          <circle cx="42" cy="24" r="2" fill="#c8a84b"/>
+        </svg>
+        <div class="svc-card__title">AI<br>Strategy</div>
+        <p class="svc-card__body">Practical AI strategy grounded in operational reality — use case prioritization, governance framework design, and readiness assessment. We help Canadian organizations adopt AI deliberately, with the accountability structures and risk controls the technology demands.</p>
+        <div class="svc-card__tags">
+          <span class="tag tag--violet">AI Readiness</span>
+          <span class="tag tag--violet">AI Governance</span>
+          <span class="tag tag--gold">Use Case Prioritization</span>
+          <span class="tag tag--gold">Risk Controls</span>
+          <span class="tag tag--dim">Change Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── ABOUT ── -->
+<section class="section" id="about">
+  <div class="section__inner">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="about-element">
+          <span class="about-element__num">57</span>
+          <span class="about-element__sym">La</span>
+          <span class="about-element__name">Lanthanum</span>
+        </div>
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="section-title">Rare expertise.<br><em>Essential outcomes.</em></h2>
+        <p class="about-body">Lantix takes its name from the <strong>lanthanide series</strong> — the rare earth elements that quietly power every advanced technology on earth. Most people don't know they exist. Nothing works without them.</p>
+        <p class="about-body">Our owner brings over <strong>25 years of senior operational experience</strong> across financial services, energy, and federal government — with deep expertise in the frameworks that keep complex organizations functioning when conditions are adverse.</p>
+        <p class="about-body">Every engagement is led personally. The person you meet is the person who delivers.</p>
+        <a href="#contact" class="btn btn--outline" style="margin-top:.5rem">Start a Conversation</a>
+      </div>
+      <div class="reveal-right">
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar__num">01</div>
+            <div class="pillar__title">Senior-Led</div>
+            <div class="pillar__body">Every engagement led at the principal level. No handoffs after the contract is signed.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">02</div>
+            <div class="pillar__title">Embedded</div>
+            <div class="pillar__body">We work inside your organization, not at arm's length from a boardroom.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">03</div>
+            <div class="pillar__title">Measurable</div>
+            <div class="pillar__body">Every engagement defined by outcomes, not activities or hours billed.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">04</div>
+            <div class="pillar__title">Canadian</div>
+            <div class="pillar__body">Built here. Optimized for Canadian regulatory context, culture, and scale.</div>
+          </div>
+        </div>
+        <div style="margin-top:1px;background:var(--rule);border:1px solid var(--rule);border-top:0">
+          <div style="background:var(--bg);padding:1.8rem;">
+            <div style="font-family:var(--serif);font-size:1.05rem;font-style:italic;font-weight:300;color:var(--paper);line-height:1.55;border-left:2px solid var(--gold);padding-left:1.5rem">"We measure success by the capability your organization has when we leave — not by how long we extend the engagement."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── OWNER ── -->
+<div class="owner-section" id="owner">
+  <div class="owner-inner reveal">
+    <div class="owner-mark">
+      <div class="owner-spectrum">
+        <div class="os"></div><div class="os"></div><div class="os"></div>
+        <div class="os"></div><div class="os"></div>
+      </div>
+      <div class="owner-wordmark">LANTIX</div>
+    </div>
+    <div class="owner-content">
+      <div class="owner-quote">"Every major resilience failure I've seen had the same root cause: someone knew the risk and assumed someone else was managing it."</div>
+      <div class="owner-name">Alan Moote</div>
+      <div class="owner-title">Owner · Lantix Advisory Group</div>
+      <p class="owner-bio">Alan brings <strong>25 years of senior leadership</strong> across financial services, energy, and federal government — with deep expertise in operational resilience, enterprise risk management, GRC architecture, and data governance. He has designed BCM frameworks for regulated financial institutions, led crisis management programme development for critical infrastructure operators, and built governance structures for organizations operating at national scale. His AI strategy practice is grounded in the operational realities that most technology-first approaches miss entirely.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ── WHY LANTIX ── -->
+<section class="section section--alt">
+  <div class="section__inner">
+    <div style="margin-bottom:3rem">
+      <div class="eyebrow reveal">Why Lantix</div>
+      <h2 class="section-title reveal" style="max-width:600px">Small by design.<br><em>Deep by conviction.</em></h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-card__num">01</div>
+        <div class="why-card__title">No Junior Staff</div>
+        <p class="why-card__body">Every deliverable produced and reviewed at the senior level. You will never receive work from someone who is still learning the domain.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__num">02</div>
+        <div class="why-card__title">Honest Counsel</div>
+        <p class="why-card__body">We will tell you what you need to hear — including when you need a different firm, a different approach, or simply more time before beginning.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__num">03</div>
+        <div class="why-card__title">Capability Transfer</div>
+        <p class="why-card__body">We build lasting internal capability. The goal is that your team no longer needs us — and that they're equipped to sustain what we've built together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── CONTACT ── -->
+<section class="section" id="contact">
+  <div class="section__inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:3rem">
+      <div class="reveal-left">
+        <div class="eyebrow">Get In Touch</div>
+        <h2 class="section-title">Ready to begin<br><em>a real conversation?</em></h2>
+      </div>
+      <p class="section-lead reveal-right">No sales calls. No junior intake staff. Your first conversation is directly with the principal — honest, no-obligation, and as long as it needs to be.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="contact-form reveal-left" onsubmit="handleForm(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Full name" required>
+        </div>
+        <div class="form-group">
+          <label for="org">Organisation</label>
+          <input type="text" id="org" name="org" placeholder="Company or agency">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@organisation.ca" required>
+        </div>
+        <div class="form-group">
+          <label for="service">Area of Interest</label>
+          <select id="service" name="service">
+            <option value="">— Select a practice area —</option>
+            <option>Operational Resilience</option>
+            <option>Audit &amp; Compliance</option>
+            <option>Risk &amp; Governance</option>
+            <option>AI Strategy</option>
+            <option>Multiple / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">What brings you here?</label>
+          <textarea id="message" name="message" placeholder="Brief description of the challenge or opportunity you're facing…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary" style="align-self:flex-start">Send Message</button>
+        <div id="form-success" style="display:none;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--gold);margin-top:.5rem">Message received — we'll be in touch within one business day.</div>
+      </form>
+      <div class="contact-info reveal-right">
+        <div>
+          <div class="eyebrow" style="margin-bottom:1.5rem">Direct Contact</div>
+          <div class="contact-channel">
+            <div class="contact-channel__icon">@</div>
+            <div>
+              <div class="contact-channel__label">Email</div>
+              <div class="contact-channel__value"><a href="mailto:hello@lantix.ca" style="color:var(--paper);transition:color .2s">hello@lantix.ca</a></div>
+            </div>
+          </div>
+          <div class="contact-channel" style="margin-top:1.2rem">
+            <div class="contact-channel__icon">Ca</div>
+            <div>
+              <div class="contact-channel__label">Location</div>
+              <div class="contact-channel__value">Toronto, Ontario · Canada</div>
+            </div>
+          </div>
+          <div class="contact-channel" style="margin-top:1.2rem">
+            <div class="contact-channel__icon">in</div>
+            <div>
+              <div class="contact-channel__label">LinkedIn</div>
+              <div class="contact-channel__value">Lantix Advisory Group</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-promise">
+          <p>All enquiries are responded to personally within one business day. Your message goes directly to the principal — not a CRM queue or intake coordinator.</p>
+        </div>
+        <div style="border:1px solid var(--rule);padding:2rem;background:var(--surf)">
+          <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;color:var(--violet);margin-bottom:.8rem;text-transform:uppercase">Our Commitment</div>
+          <p style="font-family:var(--serif);font-size:1rem;font-style:italic;font-weight:300;color:var(--paper);line-height:1.55">If we aren't the right fit for your challenge, we'll tell you — and, where we can, point you toward someone who is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="spectrum spectrum--xs spectrum--ghost">
+          <div class="sl"></div><div class="sl"></div><div class="sl"></div>
+          <div class="sl"></div><div class="sl"></div>
+        </div>
+        <span class="footer__wordmark">LANTIX</span>
+      </div>
+      <div class="footer__tagline">"The elements that power everything else."</div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 Lantix Advisory Group. All rights reserved. Canada.</span>
+      <div style="display:flex;gap:1.5rem">
+        <a href="#services" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;transition:color .2s">Services</a>
+        <a href="#about" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;transition:color .2s">About</a>
+        <a href="#contact" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;transition:color .2s">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ── SCRIPTS ── -->
+<script>
+(function(){
+  /* Scroll progress */
+  const sp = document.getElementById('sp');
+  const nav = document.getElementById('nav');
+  const bt = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    sp.style.transform = 'scaleX(' + p + ')';
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    bt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive:true});
+
+  /* Mobile nav */
+  document.getElementById('burger').addEventListener('click', function(){
+    const mn = document.getElementById('mobile-nav');
+    mn.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav__mobile a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+  });
+
+  /* Reveal observer */
+  const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-delay-1,.reveal-delay-2,.reveal-delay-3,.reveal-delay-4');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:.12});
+  revealEls.forEach(el => obs.observe(el));
+
+  /* VU meter hero animation */
+  const TRACK_H = 260;
+  const CONFIG = [
+    {color:'#8050c0',restFrac:200/228,amp:.13,freq:1.31,phase:0.0},
+    {color:'#c8a84b',restFrac:228/228,amp:.05,freq:.97, phase:1.1},
+    {color:'#7040b0',restFrac:180/228,amp:.17,freq:1.63,phase:2.2},
+    {color:'#787888',restFrac:158/228,amp:.11,freq:1.21,phase:0.7},
+    {color:'#c8a84b',restFrac:210/228,amp:.09,freq:1.47,phase:1.8}
+  ];
+  const ANIM_DUR = 6, SETTLE_DUR = 1.2;
+  const wrap = document.getElementById('vu-hero');
+  if(wrap) {
+    const fills = CONFIG.map(c => {
+      const t = document.createElement('div');
+      t.className = 'vu-track';
+      t.style.cssText = 'width:10px;height:' + TRACK_H + 'px';
+      const f = document.createElement('div');
+      f.className = 'vu-fill';
+      f.style.cssText = 'background:' + c.color + ';height:' + (c.restFrac*TRACK_H).toFixed(1) + 'px';
+      t.appendChild(f); wrap.appendChild(t); return f;
+    });
+    function vu(t,b,a,f,p){
+      const v=b+a*Math.sin(f*t+p)+a*.4*Math.sin(f*2.3*t+p+.9)+a*.15*Math.sin(f*5.1*t+p+1.7);
+      return Math.max(.06,Math.min(1,v));
+    }
+    function easeOut(t){return 1-Math.pow(1-t,3);}
+    let ts0=null, lastH=CONFIG.map(c=>c.restFrac*TRACK_H);
+    function tick(ts){
+      if(!ts0) ts0=ts;
+      const el=(ts-ts0)/1000;
+      if(el>=ANIM_DUR+SETTLE_DUR){
+        CONFIG.forEach((c,i)=>fills[i].style.height=(c.restFrac*TRACK_H).toFixed(1)+'px'); return;
+      }
+      if(el<ANIM_DUR){
+        CONFIG.forEach((c,i)=>{
+          const h=vu(el,c.restFrac,c.amp,c.freq,c.phase)*TRACK_H;
+          lastH[i]=h; fills[i].style.height=h.toFixed(1)+'px';
+        });
+      } else {
+        const t=easeOut((el-ANIM_DUR)/SETTLE_DUR);
+        CONFIG.forEach((c,i)=>{
+          const h=lastH[i]+(c.restFrac*TRACK_H-lastH[i])*t;
+          fills[i].style.height=h.toFixed(1)+'px';
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* Contact form */
+  window.handleForm = function(e){
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+  };
+})();
+</script>
+</body>
+</html>
