@@ -341,9 +341,12 @@ hr.rule{border:none;border-top:1px solid var(--rule);margin:0 var(--pad)}
 .owner-bio{font-size:.9rem;font-weight:300;color:var(--muted);
   line-height:1.85;max-width:560px}
 .owner-bio strong{color:var(--paper);font-weight:400}
-.owner-photo{width:160px;height:200px;border-radius:4px;object-fit:cover;
-  object-position:center top;border:1px solid var(--rule);display:block;
-  margin-top:1.5rem}
+.owner-photo-frame{margin-top:1.5rem;padding:2px;border-radius:12px;
+  background:linear-gradient(160deg,var(--violet),var(--gold));
+  box-shadow:0 0 24px rgba(144,96,200,.18),0 0 8px rgba(200,168,75,.10);
+  flex-shrink:0}
+.owner-photo{width:160px;height:200px;border-radius:10px;object-fit:cover;
+  object-position:center top;display:block}
 
 /* ── WHY US ── */
 .why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
@@ -603,7 +606,9 @@ hr.rule{border:none;border-top:1px solid var(--rule);margin:0 var(--pad)}
         <div class="os"></div><div class="os"></div>
       </div>
       <div class="owner-wordmark">LANTIX</div>
-      <img src="assets/images/alan-moote.jpg" alt="Alan Moote" class="owner-photo">
+      <div class="owner-photo-frame">
+        <img src="assets/images/alan-moote.jpg" alt="Alan Moote" class="owner-photo">
+      </div>
     </div>
     <div class="owner-content">
       <div class="owner-quote">"Nearly every major service failure I've seen had the same root cause: someone knew the risk and assumed someone else was managing it."</div>
