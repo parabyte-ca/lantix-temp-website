@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+  <title>Lantix</title>
+  <g>
+    <rect x="148" y="128" width="32" height="256" fill="#8050c0"></rect>
+    <rect x="200" y="96" width="32" height="288" fill="#c8a84b"></rect>
+    <rect x="252" y="208" width="32" height="176" fill="#7040b0"></rect>
+    <rect x="304" y="184" width="32" height="200" fill="#787888"></rect>
+    <rect x="356" y="120" width="32" height="264" fill="#c8a84b"></rect>
+  </g>
+</svg>
